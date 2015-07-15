@@ -23,30 +23,9 @@
 </div>
 
 <div>
-<% unless @data.nil? %>
-  <table class="table table-striped">
-  <tr>
-    <td>Company ID:</td>
-    <td>Post ID:</td>
-    <td>Employer:</td>
-    <td>Job Title:</td>
-    <td>Details Link:</td>
-    <td>Location:</td>
-    <td>Date Posted:</td>
-  </tr>
-  <% @data.each do |line| %>
-    <tr>
-    <% job = line %>
-      <td><%=job[0] %></td>
-      <td><%=job[1] %></td>
-      <td><%=job[2] %></td>
-      <td><%=job[3] %></td>
-      <td><a href=<%=job[4]%>>Details</a></td>
-      <td><%=job[5] %></td>
-      <td><%=job[6] %></td>
-    </tr>
-    <% end %>
-  </table>
+<% unless data.nil? %>
+  <%= erb :"results", :locals =>{:data => data}%>
+
 <% end %>
 
 </div>

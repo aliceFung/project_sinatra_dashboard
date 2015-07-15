@@ -13,7 +13,7 @@ post '/' do
   local = params[:location]
   keyword = params[:keyword]
   scraper = Scraper::DiceScraper.new
-  @data = scraper.scrape_only(local, keyword)
-  erb :index
+  data = scraper.scrape_only(local, keyword)
+  erb :index, :locals =>{:data => data}
 
 end
