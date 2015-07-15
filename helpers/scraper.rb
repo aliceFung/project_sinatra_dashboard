@@ -9,15 +9,15 @@ module Scraper
   class DiceScraper
 
     DICE_ID_RGX = /detail\/.*?\/(.*?)\/(.*?)\?/
-
-    def initialize
+    def initialize  #(local, keyword)
       @agent = Mechanize.new
       #mechanize object waits 0.5secs after every HTML request
       @agent.history_added = Proc.new { sleep 0.5 }
+      #scrape_only(local, keyword)
     end
 
-    def scrape_only
-      mech_obj, time_scraped = scraping_dice
+    def scrape_only(local, keyword)
+      mech_obj, time_scraped = scraping_dice(local, keyword)
       job_list = post_generator(mech_obj)
       data = scrape_job_post(job_list, time_scraped)
     end
@@ -29,14 +29,14 @@ module Scraper
       save_data(data)
     end
 
-    def scraping_dice
+    def scraping_dice(local, keyword)
       page = @agent.get('http://www.dice.com')
       results_page = nil
       dice_search_page = "http://www.dice.com/jobs"
       @agent.get(dice_search_page) do |page|
         results_page = page.form_with(:name => nil) do |search|
-            search.q = 'junior developer'
-            search.l = 'New York, NY'
+            search.q = keyword
+            search.l = local
         end.submit
       end
       time = Time.now

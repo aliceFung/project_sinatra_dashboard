@@ -23,7 +23,7 @@
 </div>
 
 <div>
-<% unless data.nil? %>
+<% unless @data.nil? %>
   <table class="table table-striped">
   <tr>
     <td>Company ID:</td>
@@ -34,9 +34,9 @@
     <td>Location:</td>
     <td>Date Posted:</td>
   </tr>
-  <% data.each do |line| %>
+  <% @data.each do |line| %>
     <tr>
-    <% job = line.split(",") %>
+    <% job = line %>
       <td><%=job[0] %></td>
       <td><%=job[1] %></td>
       <td><%=job[2] %></td>
