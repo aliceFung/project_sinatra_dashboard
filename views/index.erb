@@ -1,0 +1,52 @@
+<div class="well">
+
+<form class="form-horizontal" form action="/" method="post">
+  <div class="form-group">
+    <label for="keywords" class="col-sm-2 control-label">Job Title or Keywords: </label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" placeholder="job title, skills, keywords or company name" name="keyword">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="location" class="col-sm-2 control-label">Location</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" placeholder="zip code, city or state" name="location">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-success btn-lg" value="Submit">Find Tech Jobs</button>
+    </div>
+  </div>
+</form>
+
+</div>
+
+<div>
+<% unless data.nil? %>
+  <table class="table table-striped">
+  <tr>
+    <td>Company ID:</td>
+    <td>Post ID:</td>
+    <td>Employer:</td>
+    <td>Job Title:</td>
+    <td>Details Link:</td>
+    <td>Location:</td>
+    <td>Date Posted:</td>
+  </tr>
+  <% data.each do |line| %>
+    <tr>
+    <% job = line.split(",") %>
+      <td><%=job[0] %></td>
+      <td><%=job[1] %></td>
+      <td><%=job[2] %></td>
+      <td><%=job[3] %></td>
+      <td><a href=<%=job[4]%>>Details</a></td>
+      <td><%=job[5] %></td>
+      <td><%=job[6] %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+
+</div>
